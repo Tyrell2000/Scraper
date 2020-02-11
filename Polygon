@@ -1,0 +1,48 @@
+public class Polygon extends Node {
+  
+  ArrayList<Point> points = new ArrayList<Point>();
+  ArrayList<Line> lines = new ArrayList<Line>();
+  color c;
+  private int pointsCurrent = 2;  private int linesCurrent = 1;
+  
+  public Polygon(int x1, int y1, int x2, int y2, color c) {
+    this.points.add(new Point(x1, y1));
+    this.points.add(new Point(x2, y2));
+    lines.add(new Line(x1, x2, y1, y2, c));
+    this.nodes.add(points.get(0));
+    this.nodes.add(points.get(1));
+    this.c = c;
+  }
+ 
+  public void addPoint(int x, int y){
+       
+    pointsCurrent = pointsCurrent + 1;
+    points.add(new Point(x, y));
+    
+    linesCurrent = linesCurrent + 1;
+    lines.add(new Line((int) points.get(linesCurrent - 1).getProperty("x"), (int) points.get(linesCurrent - 1).getProperty("y"), x, y, c));
+    
+    this.nodes.add(points.get(pointsCurrent)); 
+  
+  }
+  
+  public void display(CanvasModel model) {
+    for (Line currentLine : lines){
+    
+      currentLine.display(model);
+    
+    }
+    
+    model.getCanvas().Line
+  }
+  
+  public void draw(CanvasModel model) {
+    
+    for (Line currentLine : lines){
+    
+      currentLine.draw(model);
+    
+    }
+    
+  }
+}
